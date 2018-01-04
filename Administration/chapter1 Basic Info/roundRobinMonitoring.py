@@ -5,7 +5,7 @@ import http.client
 import binascii
 
 iplist=[]
-appdomain="yeeyi.com"
+appdomain="163.com"
 def get_iplist (domain=""):
     try:
         A = dr.query(domain, 'A')
@@ -26,16 +26,16 @@ def checkip(ip):
     try:
         conn.request ("GET", "/", headers = {"Host": appdomain})
         r=conn.getresponse()
-#h5 first 6 characters are <html>
-        getcontent_h5=r.read(6)
-        getcontent_h5_txt=getcontent_h5.decode("utf-8")
-        print(getcontent_h5_txt)
-#pre H5 first 15 characters are <! doctype html>
-        getcontent_pre=r.read(15)
-        getcontent_pre_txt=getcontent_pre.decode("utf-8")
-        print(getcontent_pre_txt)
+#preh5 first 14 characters are <!DOCTYPE html , h5 first 6 characters are <html>, we will read once, then test twice.
+#if we get either one, means the webserver is alive
+        getcontent_preh5=r.read(14)
+        getcontent_preh5txt=getcontent_preh5.decode("utf-8")
+#       print(getcontent_preh5txt)
+#get the first 6 characters for h5 testing
+        getcontent_h5_txt=getcontent_preh5txt[:6]
+#        print(getcontent_h5_txt)
     finally:
-        if ((getcontent_h5_txt=="<html>")or(getcontent_pre_txt=="YPE html PUBLIC")):
+        if ((getcontent_h5_txt=="<html>")or(getcontent_preh5txt=="<!DOCTYPE html")):
             print(ip + "[OK!]")
         else:
             print(ip + "[Error!]")
