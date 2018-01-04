@@ -1,0 +1,17 @@
+import filecmp
+result_dir=filecmp.dircmp("dir1","dir2")
+
+result_dir.report( )
+result_dir.report_partial_closure( )
+result_dir.report_full_closure( )
+print ("left_list： "+ str( result_dir.left_list))
+print ("right_list： "+ str( result_dir.right_list))
+print ("common： "+ str( result_dir.common))
+print ("left_only： "+ str( result_dir.left_only))
+print ("right_only： "+ str( result_dir.right_only))
+print ("common_dirs： "+ str( result_dir.common_dirs))
+print ("common_files： "+ str( result_dir.common_files))
+print ("common_funny： "+ str( result_dir.common_funny))
+print ("same_file： "+ str( result_dir.same_files))
+print ("diff_files： "+ str( result_dir.diff_files))
+print ("funny_files： "+ str( result_dir.funny_files))
