@@ -3,7 +3,7 @@ import dns.resolver as dr
 import os
 import http.client
 import binascii
-
+#test
 iplist=[]
 appdomain="163.com"
 def get_iplist (domain=""):
